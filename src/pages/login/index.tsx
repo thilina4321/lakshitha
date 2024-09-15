@@ -1,5 +1,6 @@
 import Button from "@/components/Button";
 import Input from "@/components/Input";
+import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -11,6 +12,9 @@ const LoginPage = () => {
 
   return (
     <div className="flex flex-col md:flex-row items-center gap-4 justify-center min-h-screen bg-gray-100 p-4">
+      <Head>
+        <title>Login Page</title>
+      </Head>
       <div className="w-full md:w-1/2 h-auto md:h-screen flex items-center justify-center">
         <Image
           src="/login.png"
