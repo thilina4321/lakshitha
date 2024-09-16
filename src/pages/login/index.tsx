@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Head from "next/head";
@@ -8,13 +9,17 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const loginHandler = async () => {};
+  const loginHandler = async () => {
+    // Login logic goes here
+  };
 
   return (
-    <div className="flex flex-col md:flex-row items-center gap-4 justify-center min-h-screen bg-gray-100 p-4">
+    <div className="flex flex-col md:flex-row items-center gap-8 justify-center min-h-screen bg-gray-50 px-4">
       <Head>
         <title>Login Page</title>
       </Head>
+
+      {/* Left side: Image */}
       <div className="w-full md:w-1/2 h-auto md:h-screen flex items-center justify-center">
         <Image
           src="/login.png"
@@ -22,16 +27,18 @@ const LoginPage = () => {
           layout="intrinsic"
           width={600}
           height={600}
-          className="w-full h-auto"
+          className="rounded-lg shadow-lg"
         />
       </div>
 
+      {/* Right side: Form */}
       <div className="w-full md:w-1/2 h-auto md:h-screen flex items-center justify-center">
-        <div className="w-full bg-white p-6 py-16 shadow-lg rounded-lg">
-          <form className="space-y-6">
+        <div className="w-full max-w-md bg-white p-8 shadow-xl rounded-lg">
+          <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Welcome Back</h2>
+          <div className="space-y-6">
             <div className="flex flex-col">
               <Input
-                lable="Email"
+                label="Email"
                 value={email}
                 setValue={(val: string) => setEmail(val)}
                 placeHolder="Enter your email"
@@ -41,16 +48,16 @@ const LoginPage = () => {
 
             <div className="flex flex-col">
               <Input
-                lable="Password"
+                label="Password"
                 value={password}
                 setValue={(val: string) => setPassword(val)}
-                placeHolder="Enter your passwprd"
+                placeHolder="Enter your password"
                 type="password"
               />
             </div>
 
             <Button name="Login" onClick={loginHandler} />
-          </form>
+          </div>
         </div>
       </div>
     </div>

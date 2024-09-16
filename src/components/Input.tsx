@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
 type Props = {
-  lable: string;
+  label: string;
   type: "text" | "email" | "password";
   placeHolder: string;
   value: string;
@@ -9,15 +9,15 @@ type Props = {
 };
 
 const Input: FC<Props> = (props) => {
-  const { lable, type, value, setValue, placeHolder } = props;
+  const { label, type, value, setValue, placeHolder } = props;
   return (
     <>
-      <label className="mb-1 font-bold text-gray-700">{lable}</label>
+      <label className="mb-1 font-bold text-gray-700">{label}</label>
       <input
         value={value}
         onChange={(e) => setValue(e.target.value)}
         type={type}
-        className="border border-gray-300 p-2 rounded-md"
+        className="border border-gray-300 p-2 rounded-md text-black"
         placeholder={placeHolder}
       />
     </>
