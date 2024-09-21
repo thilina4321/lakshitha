@@ -25,9 +25,9 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
 
   const tabs = [
     { name: "Overview", path: "/dashboard/overview" },
-    // { name: "Connectors", path: "/dashboard/connectors" },
-    // { name: "Destination", path: "/dashboard/destination" },
-    // { name: "Account", path: "/dashboard/account" },
+    { name: "Connectors", path: "/dashboard/connectors" },
+    { name: "Destination", path: "/dashboard/destination" },
+    { name: "Account", path: "/dashboard/account" },
   ];
 
   const handleTabClick = (path: string) => {
@@ -61,7 +61,7 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
   return (
     <Box className="flex flex-col min-h-screen">
       {/* AppBar */}
-      <AppBar position="static" elevation={0} className="bg-white rounded-lg shadow-md">
+      <AppBar position="static" className="bg-white rounded-lg shadow-md">
         <Toolbar className="flex gap-4">
           <Typography variant="h6" className="text-gray-900 flex-1">
             Middleware Connector
