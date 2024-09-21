@@ -1,16 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { AppBar, Toolbar, Typography, Box, Button, CircularProgress } from "@mui/material";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const router = useRouter();
-
   const [loading, setLoading] = useState(true);
 
-  console.log(router.pathname, "===");
+  console.log(
+    ` ${
+      router?.pathname?.startsWith("/dashboard/account")
+        ? "bg-blue-600 text-white font-bold"
+        : "bg-white text-gray-900 hover:bg-indigo-100 shadow-sm"
+    }`,
+  );
 
+  // Ensure that localStorage is only accessed on the client side
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -85,7 +90,7 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
               key={tab.name}
               onClick={() => handleTabClick(tab.path)}
               className={`w-full text-left py-4 px-6 rounded-lg transition-all duration-200 ${
-                router.pathname.startsWith(tab.path)
+                router?.pathname?.startsWith(tab.path)
                   ? "bg-blue-600 text-white font-bold"
                   : "bg-white text-gray-900 hover:bg-indigo-100 shadow-sm"
               }`}
