@@ -7,7 +7,6 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const router = useRouter();
 
-  const [activeTab, setActiveTab] = useState(router.pathname.split("/")[2] || "overview");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -28,7 +27,6 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
   ];
 
   const handleTabClick = (path: string) => {
-    setActiveTab(path.split("/")[2]);
     router.push(path);
   };
 
@@ -89,7 +87,7 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
               key={tab.name}
               onClick={() => handleTabClick(tab.path)}
               className={`w-full text-left py-4 px-6 rounded-lg transition-all duration-200 ${
-                activeTab === tab.path.split("/")[2]
+                router.pathname.includes(tab.path)
                   ? "bg-indigo-600 text-white font-bold"
                   : "bg-white text-gray-900 hover:bg-indigo-100 shadow-sm"
               }`}
