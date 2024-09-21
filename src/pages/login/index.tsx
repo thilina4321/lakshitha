@@ -1,16 +1,64 @@
-/* eslint-disable react/no-unescaped-entities */
+import { useEffect, useState } from "react";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Head from "next/head";
 import Image from "next/image";
-import { useState } from "react";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+import { Box, CircularProgress } from "@mui/material";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [notification, setNotification] = useState({
+    open: false,
+    message: "",
+    type: "success" as "success" | "error",
+  });
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    // If token is not present, redirect to login page
+    if (token) {
+      window.location.replace("/dashboard");
+    } else {
+      setLoading(false); // Stop loading if token is present
+    }
+  }, []);
 
   const loginHandler = async () => {
-    // Login logic goes here
+    if (email === "lnal@gmail.com" && password === "abc@123") {
+      setNotification({
+        open: true,
+        message: "Login successful!",
+        type: "success",
+      });
+      await localStorage.setItem("token", "hello");
+      window.location.replace("/dashboard");
+      //   router.push("/dashboard");
+      // Delay navigation for better UX
+    } else {
+      setNotification({
+        open: true,
+        message: "Invalid email or password.",
+        type: "error",
+      });
+    }
+  };
+
+  if (loading) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  const handleClose = () => {
+    setNotification({ ...notification, open: false });
   };
 
   return (
@@ -60,6 +108,17 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
+
+      {/* Notification */}
+      <Snackbar
+        open={notification.open}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert onClose={handleClose} severity={notification.type}>
+          {notification.message}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

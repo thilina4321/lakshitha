@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { AppBar, Toolbar, Typography, Box, Button } from "@mui/material";
+import { AppBar, Toolbar, Typography, Box, Button, CircularProgress } from "@mui/material";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const router = useRouter();
@@ -9,16 +10,37 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
   // Default active tab is either from the URL or 'overview'
   const [activeTab, setActiveTab] = useState(router.pathname.split("/")[2] || "overview");
 
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    // If token is not present, redirect to login page
+    if (!token) {
+      router.push("/login");
+    } else {
+      setLoading(false); // Stop loading if token is present
+    }
+  }, [router]);
+
   const tabs = [
     { name: "Overview", path: "/dashboard/overview" },
-    { name: "Connectors", path: "/dashboard/connectors" },
-    { name: "Destination", path: "/dashboard/destination" },
-    { name: "Account", path: "/dashboard/account" },
+    // { name: "Connectors", path: "/dashboard/connectors" },
+    // { name: "Destination", path: "/dashboard/destination" },
+    // { name: "Account", path: "/dashboard/account" },
   ];
 
   const handleTabClick = (path: string) => {
     setActiveTab(path.split("/")[2]);
     router.push(path); // Navigate to the clicked tab
+  };
+
+  const handleLogout = () => {
+    // Remove token from localStorage (or any other authentication mechanism you use)
+    localStorage.removeItem("token");
+
+    // Navigate back to login page
+    router.push("/login");
   };
 
   // Redirect to /dashboard/overview if the user is on /dashboard
@@ -28,17 +50,37 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
     }
   }, [router]);
 
+  if (loading) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
+        <CircularProgress />
+      </Box>
+    );
+  }
+
   return (
     <Box className="flex flex-col min-h-screen">
       {/* AppBar */}
       <AppBar position="static" elevation={0} className="bg-white rounded-lg shadow-md">
-        <Toolbar className="flex justify-between">
-          <Typography variant="h6" className="text-gray-900">
+        <Toolbar className="flex gap-4">
+          <Typography variant="h6" className="text-gray-900 flex-1">
             Middleware Connector
           </Typography>
           <Typography variant="body1" className="text-gray-800">
             Welcome Dilesh
           </Typography>
+
+          <Box>
+            <Button
+              variant="contained"
+              color="error"
+              startIcon={<ExitToAppIcon />}
+              fullWidth
+              onClick={handleLogout}
+            >
+              Sign Out
+            </Button>
+          </Box>
         </Toolbar>
       </AppBar>
 

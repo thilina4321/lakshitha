@@ -57,12 +57,8 @@ const AddSource: React.FC = () => {
           <Box className="w-full p-4 border border-gray-300 shadow-sm bg-white flex justify-between items-center space-x-4">
             <Box className="flex items-center">
               {/* Source Icon */}
-              <Box className="w-14 h-14 bg-gray-100 mr-4 flex items-center justify-center">
-                <img
-                  src={filteredSource[0].logo}
-                  alt={`${filteredSource[0].name} Logo`}
-                  className="w-10 h-10"
-                />
+              <Box className="w-14 h-14 font-bold bg-gray-100 mr-4 flex text-white bg-black items-center justify-center">
+                <p>{filteredSource[0].name.charAt(0)}</p>
               </Box>
 
               {/* Source Title */}
