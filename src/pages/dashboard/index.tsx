@@ -1,19 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { AppBar, Toolbar, Typography, Box, Button, CircularProgress } from "@mui/material";
+import { AppBar, Toolbar, Typography, Box, CircularProgress } from "@mui/material";
+import Button from "@mui/material/Button";
 import { useRouter } from "next/router";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
-
-  console.log(
-    ` ${
-      router?.pathname?.startsWith("/dashboard/account")
-        ? "bg-blue-600 text-white font-bold"
-        : "bg-white text-gray-900 hover:bg-indigo-100 shadow-sm"
-    }`,
-  );
 
   // Ensure that localStorage is only accessed on the client side
   useEffect(() => {
@@ -59,13 +52,13 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
   return (
     <Box className="flex flex-col min-h-screen bg-gray-50">
       {/* AppBar */}
-      <AppBar position="static" elevation={0} className="blue-600 text-white shadow-lg">
+      <AppBar position="static" elevation={0} className="bg-purple-900 text-white shadow-lg">
         <Toolbar className="flex justify-between px-6">
           <Typography variant="h6" className="font-semibold">
             Middleware Connector
           </Typography>
           <Box className="flex items-center gap-4">
-            <Typography variant="body1" className="text-gray-200">
+            <Typography variant="body1" className="text-white">
               Welcome, Dilesh
             </Typography>
             <Button
@@ -91,7 +84,7 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
               onClick={() => handleTabClick(tab.path)}
               className={`w-full text-left py-4 px-6 rounded-lg transition-all duration-200 ${
                 router?.pathname?.startsWith(tab.path)
-                  ? "bg-blue-600 text-white font-bold"
+                  ? "bg-purple-900 text-white font-bold"
                   : "bg-white text-gray-900 hover:bg-indigo-100 shadow-sm"
               }`}
             >
