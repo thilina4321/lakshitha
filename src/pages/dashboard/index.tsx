@@ -9,6 +9,8 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
 
   const [loading, setLoading] = useState(true);
 
+  console.log(router.pathname, "===");
+
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -52,11 +54,7 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
   return (
     <Box className="flex flex-col min-h-screen bg-gray-50">
       {/* AppBar */}
-      <AppBar
-        position="static"
-        elevation={0}
-        className="bg-gradient-to-r from-blue-600 to-indigo-500 text-white shadow-lg"
-      >
+      <AppBar position="static" elevation={0} className="blue-600 text-white shadow-lg">
         <Toolbar className="flex justify-between px-6">
           <Typography variant="h6" className="font-semibold">
             Middleware Connector
@@ -88,7 +86,7 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
               onClick={() => handleTabClick(tab.path)}
               className={`w-full text-left py-4 px-6 rounded-lg transition-all duration-200 ${
                 router.pathname.includes(tab.path)
-                  ? "bg-indigo-600 text-white font-bold"
+                  ? "bg-blue-600 text-white font-bold"
                   : "bg-white text-gray-900 hover:bg-indigo-100 shadow-sm"
               }`}
             >
