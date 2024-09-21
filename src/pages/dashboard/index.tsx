@@ -85,7 +85,7 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
               key={tab.name}
               onClick={() => handleTabClick(tab.path)}
               className={`w-full text-left py-4 px-6 rounded-lg transition-all duration-200 ${
-                router.pathname.includes(tab.path)
+                router.pathname.startsWith(tab.path)
                   ? "bg-blue-600 text-white font-bold"
                   : "bg-white text-gray-900 hover:bg-indigo-100 shadow-sm"
               }`}
