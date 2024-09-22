@@ -25,9 +25,9 @@ const AddSource: React.FC = () => {
       <Head>
         <title>Source</title>
       </Head>
-      <Box className="flex flex-col items-center w-full p-2">
+      <Box className="flex flex-col items-center w-full">
         {/* Search Bar */}
-        <Box className="w-full mb-8">
+        <Box className="w-11/12 my-8">
           <TextField
             fullWidth
             variant="outlined"
@@ -54,7 +54,7 @@ const AddSource: React.FC = () => {
 
         {/* Search Result */}
         {filteredSource.length > 0 && (
-          <Box className="w-full p-4 border border-gray-300 shadow-sm bg-white flex justify-between items-center space-x-4">
+          <Box className="w-11/12 p-4 border border-gray-300 shadow-sm bg-white flex justify-between items-center">
             <Box className="flex items-center">
               {/* Source Icon */}
               <Box className="w-14 h-14 font-bold bg-black mr-4 flex text-white items-center justify-center">

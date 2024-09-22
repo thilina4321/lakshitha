@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Box, Typography } from "@mui/material";
+import { Button, Box, Typography, useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import DashboardLayout from "../index"; // Import the DashboardLayout
@@ -7,14 +7,18 @@ import Head from "next/head";
 
 const Overview: React.FC = () => {
   const router = useRouter();
+  const isMobile = useMediaQuery("(max-width: 768px)"); // Detect if the screen size is mobile
 
   return (
     <DashboardLayout>
       <Head>
         <title>Overview</title>
       </Head>
-      <div className="flex justify-center items-center w-full">
-        <Box className="flex items-center justify-between w-3/4">
+      <div className="flex justify-center items-center w-full p-4">
+        {/* Adjust the layout to stack on mobile */}
+        <Box
+          className={`flex ${isMobile ? "flex-col" : "flex-row"} items-center justify-between w-full md:w-3/4 space-y-6 md:space-y-0`}
+        >
           {/* Source Box */}
           <Box className="flex flex-col items-center space-y-2">
             <Box className="w-32 h-32 bg-gray-300 flex items-center justify-center rounded-lg shadow-sm">
@@ -31,8 +35,13 @@ const Overview: React.FC = () => {
           </Box>
 
           {/* Connector Image */}
-          <Box>
-            <Image src="/connector.png" alt="Connector" width={100} height={50} />
+          <Box className={`${isMobile ? "my-4" : ""}`}>
+            <Image
+              src="/connector.png"
+              alt="Connector"
+              width={isMobile ? 80 : 100}
+              height={isMobile ? 40 : 50}
+            />
           </Box>
 
           {/* Destination Box */}
