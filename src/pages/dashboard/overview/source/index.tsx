@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Button, Box, Typography, TextField, InputAdornment, IconButton } from "@mui/material";
 import { Search as SearchIcon } from "@mui/icons-material";
-import DashboardLayout from "../index"; // Import the DashboardLayout
+import DashboardLayout from "../../index"; // Import the DashboardLayout
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 const AddSource: React.FC = () => {
+  const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
 
   const availableSources = [
@@ -19,6 +21,10 @@ const AddSource: React.FC = () => {
   const filteredSource = availableSources.filter((source) =>
     source.name.toLowerCase().includes(searchTerm.toLowerCase()),
   );
+
+  const setupHandler = async () => {
+    router.push("source/add-source/netsuite"); //FIXME
+  };
 
   return (
     <DashboardLayout>
@@ -69,6 +75,7 @@ const AddSource: React.FC = () => {
 
             {/* Setup Button */}
             <Button
+              onClick={setupHandler}
               variant="contained"
               color="primary"
               className="px-5 py-2 shadow-md hover:shadow-lg transition-all duration-200"

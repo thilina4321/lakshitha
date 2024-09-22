@@ -29,7 +29,7 @@ const ErrorPage = () => {
         </p>
 
         <div
-          onClick={() => router.push("/")}
+          onClick={() => router.push("/login")}
           className="cursor-pointer inline-block bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition"
         >
           Back to Home

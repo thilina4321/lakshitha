@@ -116,7 +116,7 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
       <AppBar
         position="static"
         elevation={0}
-        className="bg-white text-gray-900 shadow-sm"
+        className="bg-white text-gray-900 shadow-sm mb-2 py-4"
         style={{ borderBottom: "1px solid #e0e0e0" }}
       >
         <Toolbar className="flex justify-between px-6">
@@ -127,7 +127,7 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
           {/* AppBar content for desktop: Welcome and Sign Out */}
           {!isMobile && (
             <Box className="flex items-center gap-4">
-              <Typography variant="body1" className="text-gray-700">
+              <Typography variant="body1" className="text-black font-bold">
                 Welcome, Dilesh
               </Typography>
               <Button
