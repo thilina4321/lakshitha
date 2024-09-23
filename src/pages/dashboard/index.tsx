@@ -118,9 +118,10 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
           onClick={() => handleTabClick(tab.path)}
           className={`w-full text-left py-3 px-6 rounded-lg transition-all duration-200 ${
             router?.pathname?.startsWith(tab.path)
-              ? "bg-indigo-100 text-indigo-600 font-bold"
-              : "bg-gray-100 text-gray-800 hover:bg-gray-200 shadow-sm"
-          }`}
+              ? "bg-indigo-100 text-indigo-600 font-bold !important" // Adding !important to ensure styles apply
+              : "bg-gray-100 text-gray-800 hover:bg-gray-200"
+          } shadow-sm`}
+          disableElevation
         >
           {tab.name}
         </Button>
@@ -141,12 +142,13 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
   );
 
   return (
-    <Box className="flex flex-col min-h-screen bg-gray-50">
+    <Box className="flex flex-col min-h-screen">
       {/* AppBar */}
       <AppBar
         position="static"
+        color="transparent"
         elevation={0}
-        className="bg-white text-gray-900 shadow-sm mb-2 py-4"
+        className=" text-gray-900 shadow-sm mb-2 py-4"
         style={{ borderBottom: "1px solid #e0e0e0" }}
       >
         <Toolbar className="flex justify-between px-6">
@@ -157,7 +159,7 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
           {/* AppBar content for desktop: Welcome and Sign Out */}
           {!isMobile && (
             <Box className="flex items-center gap-4">
-              <Typography variant="body1" className="text-black font-bold">
+              <Typography variant="h6" className="text-black font-bold">
                 Welcome, Dilesh
               </Typography>
               <Button

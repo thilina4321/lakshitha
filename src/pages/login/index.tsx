@@ -62,7 +62,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-center gap-8 justify-center min-h-screen bg-gray-50 px-4">
+    <div className="flex flex-col md:flex-row items-center gap-8 justify-center min-h-screen bg-gray-50 p-4">
       <Head>
         <title>Login Page</title>
       </Head>
