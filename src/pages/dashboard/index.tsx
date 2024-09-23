@@ -101,7 +101,7 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
       {/* Close button for the drawer on mobile */}
       {isMobile && (
         <div className="flex justify-center items-center">
-          <Typography variant="body1" className="text-gray-900 mb-4 flex-1 ">
+          <Typography variant="h6" className="text-gray-900 mb-4 flex-1 ">
             Welcome, Dilesh
           </Typography>
 
@@ -113,18 +113,22 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
 
       {/* Tabs */}
       {tabs.map((tab) => (
-        <Button
+        <div
           key={tab.name}
           onClick={() => handleTabClick(tab.path)}
-          className={`w-full text-left py-3 px-6 rounded-lg transition-all duration-200 ${
-            router?.pathname?.startsWith(tab.path)
-              ? "bg-indigo-100 text-indigo-600 font-bold !important" // Adding !important to ensure styles apply
-              : "bg-gray-100 text-gray-800 hover:bg-gray-200"
-          } shadow-sm`}
-          disableElevation
+          className={`w-full flex justify-center text-left py-3 px-6 rounded-lg transition-all duration-200 shadow-sm cursor-pointer ${
+            !router?.pathname?.startsWith(tab.path)
+              ? "bg-gray-100 text-gray-800 hover:bg-gray-200"
+              : ""
+          }`}
+          style={{
+            backgroundColor: router?.pathname?.startsWith(tab.path) ? "#c7d2fe" : "", // Tailwind bg-indigo-100 color in hex
+            color: router?.pathname?.startsWith(tab.path) ? "#4338ca" : "", // Tailwind text-indigo-600 color in hex
+            fontWeight: router?.pathname?.startsWith(tab.path) ? "bold" : "normal",
+          }}
         >
           {tab.name}
-        </Button>
+        </div>
       ))}
 
       {isMobile && (
@@ -191,7 +195,14 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
       {/* Sidebar and Content Layout */}
       <Box className="flex flex-1">
         {/* Drawer for mobile */}
-        <Drawer anchor="left" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
+        <Drawer
+          PaperProps={{
+            className: isMobile ? "w-full" : "w-1/4", // Full width for mobile, partial width for desktop
+          }}
+          anchor="left"
+          open={drawerOpen}
+          onClose={() => setDrawerOpen(false)}
+        >
           {SidebarContent}
         </Drawer>
 
