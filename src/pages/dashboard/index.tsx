@@ -7,19 +7,21 @@ import {
   CircularProgress,
   Drawer,
   IconButton,
+  Breadcrumbs,
 } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useRouter } from "next/router";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import Link from "next/link";
 import { useMediaQuery } from "@mui/material";
 
 const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [drawerOpen, setDrawerOpen] = useState(false);
-
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   // Ensure that localStorage is only accessed on the client side
@@ -51,12 +53,39 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
     localStorage.removeItem("token");
     router.push("/login");
   };
-
   useEffect(() => {
     if (router.pathname === "/dashboard") {
       router.push("/dashboard/overview");
     }
   }, [router]);
+
+  // Breadcrumbs logic using Next.js Link
+  const generateBreadcrumbs = () => {
+    const pathnames = router.pathname.split("/").filter((x) => x);
+    return (
+      <Breadcrumbs
+        aria-label="breadcrumb"
+        separator={<NavigateNextIcon fontSize="small" />}
+        className="my-4"
+      >
+        {pathnames.map((value, index) => {
+          const isLast = index === pathnames.length - 1;
+          const to = `/${pathnames.slice(0, index + 1).join("/")}`;
+          return isLast ? (
+            <Typography color="textPrimary" key={to}>
+              {value.charAt(0).toUpperCase() + value.slice(1)}
+            </Typography>
+          ) : (
+            <Link href={to} passHref key={to}>
+              <Typography color="inherit" className="cursor-pointer hover:underline">
+                {value.charAt(0).toUpperCase() + value.slice(1)}
+              </Typography>
+            </Link>
+          );
+        })}
+      </Breadcrumbs>
+    );
+  };
 
   if (loading) {
     return (
@@ -169,9 +198,13 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
         {/* Content Area */}
         <Box
           className={`${
-            isMobile ? "flex-1" : "w-3/4 flex flex-col p-10 bg-white shadow-md rounded-xl ml-4"
+            isMobile ? "flex-1 px-2" : "w-3/4 flex flex-col p-10 bg-white shadow-md rounded-xl ml-4"
           }`}
         >
+          {/* Breadcrumbs inside the content section */}
+          {/* {generateBreadcrumbs()} */}
+
+          {/* Main content */}
           {children}
         </Box>
       </Box>
