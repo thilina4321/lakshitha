@@ -154,6 +154,11 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
         elevation={0}
         className=" text-gray-900 shadow-sm mb-2 py-4"
         style={{ borderBottom: "1px solid #e0e0e0" }}
+        sx={{
+          width: "100%", // Ensure AppBar takes the full width of the screen
+          borderBottom: "1px solid #e0e0e0",
+          boxSizing: "border-box", // Ensure padding and border are included in width calculations
+        }}
       >
         <Toolbar className="flex justify-between px-6">
           <Typography variant="h6" className="font-semibold">
